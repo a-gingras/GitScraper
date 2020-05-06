@@ -56,4 +56,7 @@ for code_page in page_content.find_all('a'):
     reg = '.*\.(tsx)|.*\.(js)$' # Regex for all Typescript files
     result = re.match(reg, code_page.get('href'))
     if(result):
-        print(code_page.get('href'))
+        print('JS or TS file: ' + code_page.get('href'))
+        page_response = requests.get(base_url + code_page.get('href'))
+        page_content = BeautifulSoup(page_response.content, "html.parser")
+        for table in page_content.find_all('tbody'):
