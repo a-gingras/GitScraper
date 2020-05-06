@@ -18,7 +18,7 @@ second_half_url = '&q=react+native&s=updated&type=Repositories'
 
 # Hardcoded URL for now.
 # Query for react native repose that were most recenty updated.
-page_link = 'https://github.com/search?o=desc&q=react+native&s=updated&type=Repositories'
+page_link = 'https://github.com/react-native-community/react-native-video/network/dependents?package_id=UGFja2FnZS0xNDgwNzUwNw%3D%3D'
 
 # Fetch the content from the url
 page_response = requests.get(page_link, timeout=5)
@@ -46,3 +46,8 @@ for link in page_content.find_all('a'):
 
 
 print(repo_urls)
+
+# Github base url
+base_url = 'https://github.com/'
+
+
