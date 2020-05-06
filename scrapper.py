@@ -48,6 +48,12 @@ for link in page_content.find_all('a'):
 print(repo_urls)
 
 # Github base url
-base_url = 'https://github.com/'
+base_url = 'https://github.com'
 
-
+page_response = requests.get('https://github.com/karan-singh-07/Netflix-clone-react-native', timeout=5)
+page_content = BeautifulSoup(page_response.content, "html.parser")
+for code_page in page_content.find_all('a'):
+    reg = '.*\.js$' # Regex for all Typescript files
+    result = re.match(reg, code_page.get('href'))
+    if(result):
+        print(code_page.get('href'))
