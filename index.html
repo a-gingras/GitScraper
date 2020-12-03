@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>upload json file to see sorted props.</h2>
+
+<input type="file" name="component" id="yourFile" multiple>
+
+<p id="demo"></p>
+
+<script>
+var fileToRead = document.getElementById("yourFile");
+
+fileToRead.addEventListener("change", function(event) {
+    var files = fileToRead.files;
+    if (files.length) {
+        console.log("Filename: " + files[0].name);
+        console.log("Type: " + files[0].type);
+        console.log("Size: " + files[0].size + " bytes");
+
+        var reader = new FileReader();
+        // This event listener will happen when the reader has read the file
+        reader.addEventListener('load', function() {
+            var result = JSON.parse(reader.result); // Parse the result into an object 
+            console.log(result);
+            keysSorted = Object.keys(result).sort(function(a,b){return result[b]-result[a]})
+
+            var x, txt = "";
+            txt += "<table border='1'>"
+            for (x in keysSorted) {
+                txt += "<tr><td>" + keysSorted[x] + "</td><td>" + result[keysSorted[x]] + "</td></tr>";
+            }
+            txt += "</table>"
+            document.getElementById("demo").innerHTML = txt;
+
+        });
+        reader.readAsText(files[0]);
+    }
+
+}, false);
+</script>
+
+</body>
+</html>
